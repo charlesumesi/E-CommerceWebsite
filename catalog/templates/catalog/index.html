@@ -1,0 +1,175 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – Homepage{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--Author: Charles Umesi-->
+<br>
+<br>
+<br>
+<p class="covered"><img alt="covered" src="{% static 'images/covered-processed.png' %}"/></p>
+
+<h2 class="h2-for-popular">Popular Hire Categories</h2>
+<div id="popular-container">
+  <section class="column-1">
+    <div class="card-1"> <!--To be positioned 'relative'-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Access' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image  %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc1">{{ hire_category.group }}</p> <!--All p elements in the popular-container to be positioned 'absolute'-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="card-2"> <!--See card-1-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Compaction' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc2">{{ hire_category.group }}</p> <!--See card-1-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="column-2">
+    <div class="card-3"> <!--See card-1-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Drilling' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc3">{{ hire_category.group }}</p> <!--See card-1-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="card-4"> <!--See card-1-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Lifting' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc4">{{ hire_category.group }}</p> <!--See card-1-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="column-3">
+    <div class="card-5"> <!--See card-1-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Sanding' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc5">{{ hire_category.group }}</p> <!--See card-1-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="card-6"> <!--See card-1-->
+      {% for hire_category in hire_categories %}
+      {% if hire_category.group == 'Sawing' %}
+      <a class="hc-link-homepage" href="{% url 'hirecategory' hire_category.id %}">
+      {% with hire_category.image_for_category as image %}
+      <img class="hc-image" alt="{{ hire_category.group }}" src="{% static image %}"/>
+      {% endwith %}
+      <p class="hc6">{{ hire_category.group }}</p> <!--See card-1-->
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<h2 class="h2-for-popular">Popular Products</h2>
+<div id="popular-hire-container">
+  <section class="left-column">
+    <figure class="popular-product-image">
+      {% for product_to_hire in products_to_hire %}
+      {% if product_to_hire.name == 'Cecotec Portable Air Conditioner ForceClima' %}
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>{{ product_to_hire.name }}</strong></a></p>
+        <p class="hire-rate">From <strong><span>£</span><span>{{ product_to_hire.daily_hire_rate }}</span></strong>/ day</p>
+        <p class="hire-now"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>Hire now</strong></a></p>
+      </figcaption>
+      {% endif %}
+      {% endfor %}
+    </figure>
+  </section>
+
+  <section class="middle-column">
+    <figure class="popular-product-image">
+      {% for product_to_hire in products_to_hire %}
+      {% if product_to_hire.name == 'Camon C2000 Rotavator' %}
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>{{ product_to_hire.name }} (SPECIAL OFFER!)</strong></a></p>
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="hire-now"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>Hire now</strong></a></p>
+      </figcaption>
+      {% endif %}
+      {% endfor %}
+    </figure>
+  </section>
+
+  <section class="right-column">
+    <figure class="popular-product-image">
+      {% for product_to_hire in products_to_hire %}
+      {% if product_to_hire.name == 'Boss Ladderspan 3T Scaffold Tower (Single Width)' %}
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>{{ product_to_hire.name }}</strong></a></p>
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="hire-now"><a href="{% url 'producttohire' product_to_hire.id %}"><strong>Hire now</strong></a></p>
+      </figcaption>
+      {% endif %}
+      {% endfor %}
+    </figure>
+  </section>
+</div>
+<br>
+<br>
+<p class="backup"><a href="{% url 'index' %}#search-form">Go up to our navigator to view all our products!</a></p>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

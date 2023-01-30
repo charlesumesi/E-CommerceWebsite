@@ -1,0 +1,48 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – Login{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<br>
+<div class="grandlogin-container">
+
+  <div class="pseudologin-leftcontainer"></div>
+
+  <div id="login-container">
+    <section class="login-card">
+    	<h3 class="login-title">LOGIN</h3>
+    	<form id="login-form" method="POST" action="">
+    		{% csrf_token %}
+    		<p class="logform-email"><i class="fa fa-envelope-square" style="font-size:0.9em;"></i><input id="log-email" type="text" name="email" placeholder="Email..."></p>
+    		<p class="logform-password"><i class="fa fa-key" style="font-size:0.9em;"></i><input id="log-password" type="password" name="password" placeholder="Password..."></p>
+        <p class="plogform-login"><input id="logform-login" type="submit" value="Login"></p>
+    	</form>
+    </section>
+
+    {% for message in messages %}
+    <p id="messages">{{ message }}</p>
+    {% endfor %}
+
+    <p class="forgot-password"><a href="{% url 'password_reset_form' %}">Forgot password?</a></p>
+    <p class="reg">Don't have an account? <span class="s-up"><a href="{% url 'register' %}">Sign Up</a></span></p>
+  </div>
+
+  <div class="pseudologin-rightcontainer"></div>
+
+</div>
+<br>
+<br>
+<br>
+
+{% endblock %}

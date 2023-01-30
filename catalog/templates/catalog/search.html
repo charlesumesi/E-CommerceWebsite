@@ -1,0 +1,113 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – Search Results for {{ query }}{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+<!--Author: Charles Umesi (Original developer of the site, 2022-2023)-->
+
+{% if product_to_hire_query|length != 0 or product_to_buy_query|length != 0  %}
+<p id="search-results" style="font-size:2.4em;">Search results for <strong>{{ query }}</strong></p>
+<br>
+{% endif %}
+
+<div id="search-page">
+  <!--Loop Products_to_hire-->
+  {% for product_to_hire in product_to_hire_query %}
+  {% if query in product_to_hire.name or product_to_hire.code or product_to_hire.hire_category_accessible or product_to_hire.mode %}
+  <figure>
+    {% with product_to_hire.image_1 as image1 %}
+    <div>
+      <img id="search-image" alt="{{ product_to_hire.name }}" src="{% static image1 %}"/>
+    </div>
+    {% endwith %}
+    <figcaption>
+      <ul>
+        <a href="{% url 'producttohire' product_to_hire.id %}">
+        <!--Mode-->
+        <li>To {{ product_to_hire.mode }}</li>
+        <!--Name of product-->
+        <li>{{ product_to_hire.name }}</li>
+        </a>
+        <!--Rating conditional-->
+        {% if product_to_hire.mean_rating == 0 %}
+        <li class="search-ratingh"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <li class="search-ratingh"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <li class="search-ratingh"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <li class="search-ratingh"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <li class="search-ratingh"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <li class="search-ratingh"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="reviews"><a href="{% url 'producttohire' product_to_hire.id %}#reviews-heading">Read reviews</a></span></li>
+        {% endif %}
+        <!--Hire rate-->
+        <li><span>£&ensp;</span>{{ product_to_hire.daily_hire_rate }}/day</li>
+      </ul>
+    </figcaption>
+    <br>
+    <br>
+  </figure>
+  {% endif %}
+  {% endfor %}
+  
+  <!--Loop Products_to_buy-->
+  {% for product_to_buy in product_to_buy_query %}
+  {% if query in product_to_buy.name or product_to_buy.code or product_to_buy.buy_category_accessible or product_to_buy.mode %}
+  <figure>
+    {% with product_to_buy.image_1 as image1 %}
+    <div>
+      <img id="search-image" alt="{{ product_to_buy.name }}" src="{% static image1 %}"/>
+    </div>
+    {% endwith %}
+    <figcaption>
+      <ul>
+        <a href="{% url 'producttobuy' product_to_buy.id %}">
+        <!--Mode-->
+        <li>To {{ product_to_buy.mode }}</li>
+        <!--Name of product-->
+        <li>{{ product_to_buy.name }}</li>
+        </a>
+        <!--Rating conditional-->
+        {% if product_to_buy.mean_rating == 0 %}
+        <li class="search-ratingb"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <li class="search-ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <li class="search-ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <li class="search-ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <li class="search-ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <li class="search-ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="reviews"><a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></li>
+        {% endif %}
+        <!--Retail price-->
+        <li><span>£&ensp;</span>{{ product_to_buy.retail_price }}</li>
+      </ul>      
+    </figcaption>
+    <br>
+    <br>
+  </figure>
+  {% endif %}
+  {% endfor %}
+  
+
+{% if product_to_hire_query|length == 0 and product_to_buy_query|length == 0 %}
+<div id="search-no-results">Your search produced no result(s)</div>
+<br>
+<br>
+<br>
+{% endif %}
+
+
+{% endblock %}

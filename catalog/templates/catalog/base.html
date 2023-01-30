@@ -1,0 +1,438 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Charles Umesi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta meta http-equiv="text/css; charset=utf-8">
+    <meta meta http-equiv="application/javascript; charset=utf-8">
+    <title>{% block title %}RGT Hire - Homepage{% endblock %}</title>
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="..{% static 'css/gamma.css' %}">
+    <link rel="stylesheet" href="..{% static 'css/font-awesome-4.7.0/css/font-awesome.css' %}">
+    {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header id="top-container">
+      <div class=logo-container>
+        <span>
+          <a href="{% url 'index' %}"><img class="logo-image" alt="logo image" src="{% static 'images/background-for-logo2.png' %}"/></a>
+        </span>
+      </div>
+      <div class="form-container">
+        <form id="search-form" action ="{% url 'search' %}" method='POST'>
+          {% csrf_token %}
+          <input id="enter" type="search" list="options" placeholder="Search products or enter enquiry" name="query" />
+          <datalist id="options">
+            {% for product_to_hire in products_to_hire %}
+            <option class="option" value="{{ product_to_hire.name }}">
+            {% endfor %}
+            {% for hire_category in hire_categories %}
+            <option class="option" value="{{ hire_category.group }}">
+            {% endfor %}
+            {% for product_to_buy in products_to_buy %}
+            <option class="option" value="{{ product_to_buy.name }}">
+            {% endfor %}
+            {% for buy_category in buy_categories %}
+            <option class="option" value="{{ buy_category.group }}">
+            {% endfor %}
+          </datalist>
+          <button id="go" type="submit"><strong>&#x1F50E;&#xFE0E;</strong></button>
+          <button id="reset" type="reset"><strong>X</strong></button>
+        </form>
+      </div>
+      <div class="login-container">
+        {% if user.is_authenticated %}    
+        <div class="sign-in"><button class="signed-in">Hi {{ request.user.get_full_name }}</button></div>
+        {% else %}
+        <div class="user"><a href="{% url 'login' %}"><button class="for-signin"><i id="user-for-page" class='fa fa-user fa-2x'></i></button></a></div>
+        {% endif %}
+      </div>
+    </header>
+  
+    <header class ="helper">
+      <ul class="signedin-head">
+        <li class="s1"><a href="#">Profile</a></li>
+        <li class="s2"><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </header>
+
+    <div id="nav-container">
+      <header>
+        <nav>
+          <ul class="nav-list">
+            <li class="to-hire">
+              <div id="hire-dropdown">To Hire<span class="hire-arrow"><i class="fa fa-angle-down"></i></span>
+                <div class="hdrop">
+                  <div class="block-1h">
+                    <ul class="drop-1h-list">
+                      <!--Avoid getting the Hire_category class to do this as JavaScript's 'mouseenter' event listener won't work-->
+                      <li><a href="{% url 'hirecategory' 1 %}">Access<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 8 %}">Breaking<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 2 %}">Compaction<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 7 %}">Cooling<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 3 %}">Drilling<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 4 %}">Lifting<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 5 %}">Sanding<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'hirecategory' 6 %}">Sawing<span>&#10095;</span></a></li>
+                    </ul>
+                  </div>
+                  <div class="block-2h">
+                    <!--Avoid getting the Hire_category and Product_to_hire classes to do this for the same reason as previous comment-->
+                    <h3 class="drop-most-popular-hire">Our most popular product in this category</h3>
+                    <figure class="drop-2h-figure">
+                      <a class="drop-2h-link" href="{% url 'producttohire' 2 %}">
+                        <img id="drop-2h-image" alt="Boss Ladderspan 3T Scaffold Tower (Single Width)" src="{% static 'images/products_to_hire/boss-ladderspan-3t-scaffold-tower--single-width-processed.png' %}"/>
+                      </a>
+                      <figcaption class="drop-2h-caption">
+                        <p class="drop-2h-captiontext">Boss Ladderspan 3T Scaffold Tower (Single Width)</p>
+                      </figcaption>
+                    </figure>
+                    <p class="drop-2h-view-cat"><a class="drop-2h-view-catlink" href="{% url 'hirecategory' 1 %}"><strong>View more</strong></a></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="to-buy">
+              <div id="buy-dropdown">To Buy<span class="buy-arrow"><i class="fa fa-angle-down"></i></span>
+                <div class="bdrop">
+                  <div class="block-1b">
+                    <ul class="drop-1b-list">
+                      <!--Avoid getting the Hire_category class to do this for the same reason as previous comment-->
+                      <li><a href="{% url 'buycategory' 1 %}">Access<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'buycategory' 2 %}">Breaking<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'buycategory' 3 %}">Drilling<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'buycategory' 4 %}">Sanding<span>&#10095;</span></a></li>
+                      <li><a href="{% url 'buycategory' 5 %}">Sawing<span>&#10095;</span></a></li>
+                    </ul>
+                  </div>
+                  <div class="block-2b">
+                    <!--Avoid getting the Buy_category and Product_to_buy classes to do this for the same reason as previous comment-->
+                    <h3 class="drop-most-popular-buy">Our most popular product in this category</h3>
+                    <figure class="drop-2b-figure">
+                      <a class="drop-2b-link" href="{% url 'producttobuy' 1 %}">
+                        <img id="drop-2b-image" alt="RGT Metal Swingback Step Ladder" src="{% static 'images/products_to_buy/step-ladder-processed.png' %}"/>
+                      </a>
+                      <figcaption class="drop-2b-caption">
+                        <p class="drop-2b-captiontext">RGT Metal Swingback Step Ladder</p>
+                      </figcaption>
+                    </figure>
+                    <p class="drop-2b-view-cat"><a class="drop-2b-view-catlink" href="{% url 'buycategory' 1 %}"><strong>View more</strong></a></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div id="contact-us"><a href="#">Contact us</a>
+              </div>
+            </li>
+
+            <li>
+              <a href="{% url 'cart' %}">
+                <button class="shopping-cart"><i class="fa fa-shopping-cart"></i></button>
+                <span class="circle">0</span>
+                <span class="hire-indicator"><b>0</b></span><span class="h-suffix"><b>H</b></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <div class="overlay">
+      <!--This is an important placeholder; do not move it or put anything in it!-->
+    </div>
+
+    <div id="core-container">
+        {% block main %}{% endblock %}
+    </div>
+
+    <div id="bottom-container">
+      <footer> <!--Made up of three 'parts': "customer-support", "terms-and-conditions", and aside-->
+        <div class="customer-support">
+          <p class="should-be-h3-but-decided-p">Customer support</p>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+        <div class="terms-and-conditions">
+          <p class="should-be-h3-but-decided-p">Terms and conditions</p>
+          <ul>
+            <li><a href="#">Our standard terms and conditions</a></li>
+            <li><a href="#">Other terms and conditions</a></li>
+          </ul>
+        </div>
+        <aside>
+          <p class="should-be-h3-but-decided-p">Training</p>
+          <p>We offer training in...</p>
+          <div>
+            <a href="{% url 'index' %}"><img class="small-logo-image" alt="Small logo image" src="{% static 'images/small-background-for-logo.png' %}"/></a>
+            <p class="motto">Making building easier</p>
+          </div>
+        </aside>
+      </footer>
+    </div>
+
+    <div id="footer-plus">
+      <div class="bottom-footer">
+        <div class="copyright-registration">
+          <p class="privacy-policy"><a href="#">Privacy Policy</a></p>
+          <p>Demo Project 2023</p>
+          <p>Registered at...</p>
+        </div>
+        <div class="payment-options">
+          <p>We accept the following payment methods</p>
+          <img alt="payment-options" src="{% static 'images/payment-logos-and-footer-plus-background-cropped.png' %}"/>
+        </div>
+      </div>
+    </div>
+
+    <!--This script deals with the search engine, enabling a search event to be triggered on clicking on the datalist choices-->
+    <script>
+      const enter = document.getElementById('enter');
+      document.querySelectorAll('#enter[list]').forEach( function(formfield) {
+        var options = document.getElementById('options');
+        var lastlength = formfield.value.length;
+        var checkInputValue = function (inputValue) {
+          if (inputValue.length - lastlength > 1) {
+            options.querySelectorAll('option').forEach( function(item) {
+              if (item.value === inputValue) {
+                formfield.form.submit();
+              }
+            });
+          }
+          lastlength = inputValue.length;
+        };
+        formfield.addEventListener('input', function () {
+          checkInputValue(this.value);
+        }, false);
+      });
+    </script>
+
+    <!--This script deals with the dropdown menus-->
+    <script>
+      // Four-part code within this script element
+
+      // Global selector
+      const overlay = document.querySelector(".overlay");
+
+      // PART 1: Code for changing what you see in block-2h, depending on what you hover over on in block 1h
+
+      // block-1h selectors
+      const hireDropdown = document.getElementById("hire-dropdown");
+      let hireArrow = document.querySelector(".hire-arrow");
+
+      // block-2h selectors
+      const block2H = document.querySelector(".block-2h");
+      const drop2HFigure = document.querySelector(".drop-2h-figure");
+      const drop2HLink = document.querySelector(".drop-2h-link");
+      const drop2HImage = document.getElementById("drop-2h-image");
+      const drop2HCaption = document.querySelector(".drop-2h-caption");
+      const drop2HCaptionText = document.querySelector(".drop-2h-captiontext");
+      const drop2HViewCat = document.querySelector(".drop-2h-view-cat");
+      const drop2HViewCatLink = document.querySelector(".drop-2h-view-catlink");
+
+      // These should not be reduced to generalised class-based instances (for the reason given in '.drop-1h-list' in the main html section)
+      let block2HArray = [
+        [
+          "{% url 'producttohire' 2 %}",
+          "Boss Ladderspan 3T Scaffold Tower (Single Width)",
+          "{% static 'images/products_to_hire/boss-ladderspan-3t-scaffold-tower--single-width-processed.png' %}",
+          "Boss Ladderspan 3T Scaffold Tower (Single Width)",
+          "{% url 'hirecategory' 1 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 3 %}",
+          "Camon C2000 Rotavator",
+          "{% static 'images/products_to_hire/rotavator-processed.png' %}",
+          "Camon C2000 Rotavator",
+          "{% url 'hirecategory' 8 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 5 %}",
+          "Honda GX Vibrating Plate",
+          "{% static 'images/products_to_hire/soil-compactor-processed.png' %}",
+          "Honda GX Vibrating Plate",
+          "{% url 'hirecategory' 2 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 1 %}",
+          "Cecotec Portable Air Conditioner ForceClima",
+          "{% static 'images/products_to_hire/Cecotec-Portable-Air-Conditioner-ForceClima-processed.png' %}",
+          "Cecotec Portable Air Conditioner ForceClima",
+          "{% url 'hirecategory' 7 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 7 %}",
+          "SKT 700W Corded Rotary Drill",
+          "{% static 'images/products_to_hire/Industrial-13mm-Long-Lifetime-Electric-Drill-processed.png' %}",
+          "SKT 700W Corded Rotary Drill",
+          "{% url 'hirecategory' 3 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 8 %}",
+          "Cat DP35N Compact Diesel Forklift",
+          "{% static 'images/products_to_hire/Cat-DP35N-Compact-Diesel-Forklift-processed.png' %}",
+          "Cat DP35N Compact Diesel Forklift",
+          "{% url 'hirecategory' 4 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 10 %}",
+          "RGT Plus Single Disc Sanding Machine",
+          "{% static 'images/products_to_hire/single-disk-floor-sander-processed.png' %}",
+          "RGT Plus Single Disc Sanding Machine",
+          "{% url 'hirecategory' 5 %}"
+        ],
+
+        [
+          "{% url 'producttohire' 11 %}",
+          "255mm Jifa 1600W Mitre Saw Machine",
+          "{% static 'images/products_to_hire/255mm-Jifa-1600W-Wood-Cutting-Machine-Electric-processed.png' %}",
+          "255mm Jifa 1600W Mitre Saw Machine",
+          "{% url 'hirecategory' 6 %}"
+        ],
+      ];
+
+      // Event listeners
+      hireDropdown.addEventListener("mouseenter", () => {
+        hireDropdown.style.color = "#FFC809";
+        hireArrow.style.transform = "rotate(180deg)";
+        overlay.style.display = "unset";
+      })
+      hireDropdown.addEventListener("mouseleave", () => {
+        hireDropdown.style.color = "white";
+        overlay.style.display = "none";
+      })
+      let listItems = document.querySelectorAll(".drop-1h-list li");
+      listItems.forEach((item, index) => {
+        item.addEventListener("mouseenter", () => {
+          drop2HLink.href = block2HArray[index][0];
+          drop2HImage.alt = block2HArray[index][1];
+          drop2HImage.src = block2HArray[index][2];
+          drop2HCaptionText.textContent = block2HArray[index][3];
+          drop2HViewCatLink.href = block2HArray[index][4];
+        })
+      })
+
+      // PART 2: Code for changing what you see in block-2b, depending on what you hover over on in block 1b
+
+      // block-1b selectors
+      const buyDropdown = document.getElementById("buy-dropdown");
+      let buyArrow = document.querySelector(".buy-arrow");
+
+      // block-2b selectors
+      const block2B = document.querySelector(".block-2b");
+      const drop2BFigure = document.querySelector(".drop-2b-figure");
+      const drop2BLink = document.querySelector(".drop-2b-link");
+      const drop2BImage = document.getElementById("drop-2b-image");
+      const drop2BCaption = document.querySelector(".drop-2b-caption");
+      const drop2BCaptionText = document.querySelector(".drop-2b-captiontext");
+      const dropBViewCat = document.querySelector(".drop-2b-view-cat");
+      const drop2BViewCatLink = document.querySelector(".drop-2b-view-catlink");
+
+      // These should not be reduced to generalised class-based instances (for the reason given in '.drop-1h-list' in the main html section)
+      let block2BArray = [
+        [
+          "{% url 'producttobuy' 1 %}",
+          "RGT Metal Swingback Step Ladder",
+          "{% static 'images/products_to_buy/step-ladder-processed.png' %}",
+          "RGT Metal Swingback Step Ladder",
+          "{% url 'buycategory' 1 %}"
+        ],
+
+        [
+          "{% url 'producttobuy' 2 %}",
+          "Camon C2000 Rotavator",
+          "{% static 'images/products_to_buy/rotavator-processed.png' %}",
+          "Camon C2000 Rotavator",
+          "{% url 'buycategory' 2 %}"
+        ],
+
+        [
+          "{% url 'producttobuy' 3 %}",
+          "SKT 700W Corded Rotary Drill",
+          "{% static 'images/products_to_buy/Industrial-13mm-Long-Lifetime-Electric-Drill-processed.png' %}",
+          "SKT 700W Corded Rotary Drill",
+          "{% url 'buycategory' 3 %}"
+        ],
+
+        [
+          "{% url 'producttobuy' 4 %}",
+          "RGT Plus Single Disc Sanding Machine",
+          "{% static 'images/products_to_buy/single-disk-floor-sander-processed.png' %}",
+          "RGT Plus Single Disc Sanding Machine",
+          "{% url 'buycategory' 4 %}"
+        ],
+
+        [
+          "{% url 'producttobuy' 5 %}",
+          "255mm Jifa 1600W Mitre Saw Machine",
+          "{% static 'images/products_to_buy/255mm-Jifa-1600W-Wood-Cutting-Machine-Electric-processed.png' %}",
+          "255mm Jifa 1600W Mitre Saw Machine",
+          "{% url 'buycategory' 5 %}"
+        ],
+      ];
+
+      // Event listeners
+      buyDropdown.addEventListener("mouseenter", () => {
+        buyDropdown.style.color = "#FFC809";
+        buyArrow.style.transform = "rotate(180deg)";
+        overlay.style.display = "unset";
+      })
+      buyDropdown.addEventListener("mouseleave", () => {
+        buyDropdown.style.color = "white";
+        overlay.style.display = "none";
+      })
+      let listItems2 = document.querySelectorAll(".drop-1b-list li");
+      listItems2.forEach((item, index) => {
+        item.addEventListener("mouseenter", () => {
+          drop2BLink.href = block2BArray[index][0];
+          drop2BImage.alt = block2BArray[index][1];
+          drop2BImage.src = block2BArray[index][2];
+          drop2BCaptionText.textContent = block2BArray[index][3];
+          drop2BViewCatLink.href = block2BArray[index][4];
+        })
+      })
+    </script>
+
+    <!--This script declares arrays required by cart.html for calculating subtotals-->
+    <script>
+      // Arrays to be shared by files below (in order to maintain accurate subtotals)
+      // Used by 'buy' products
+      let currencyArray = [];
+      let subtotalArray = [];
+      let updating_subtotalArray = [];
+
+      // Used by 'hire' products
+      let currencyArrayH = [];
+      let subtotalArrayH = [];
+      // Now there is an updating_subtotalArrayH (for 'hire' products), but it is only needed by one file only; hence, it is not declared here
+    </script>
+
+    <!--These following four scripts generate the content on cart.html as products are chosen for hiring or buying-->
+    <script src="{% static 'js/addtobasketbuy.js' %}"></script>
+    <script src="{% static 'js/buycart.js' %}"></script>
+    <script src="{% static 'js/selecthireproduct.js' %}"></script>
+    <script src="{% static 'js/hirecart.js' %}"></script>
+
+    <!--This script deals with the logout dropdown-->
+    <script>
+      $(".signed-in").click(function(){
+        $(".helper").toggle();
+      });
+    </script>
+  </body>
+</html>
