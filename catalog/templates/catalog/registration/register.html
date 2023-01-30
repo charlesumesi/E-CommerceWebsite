@@ -1,0 +1,93 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – Register{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<br>
+<div class="grandregister-container">
+
+  <div class="pseudoregister-leftcontainer"></div>
+
+  <div id="register-container">
+    <section class="register-card">
+      <h3 class="register-title">REGISTER ACCOUNT</h3>
+      <form id="register-form" method="POST" action="">
+        {% csrf_token %}
+        <p class="regform-email"><i class="fa fa-envelope-square" style="font-size:0.9em;"></i>{{ form.email }}</p>
+        <p class="regform-password"><i class="fa fa-key" style="font-size:0.9em;"></i>{{ form.password }}</p>
+        <p class="regform-password"><i class="fa fa-key" style="font-size:0.9em;"></i>{{ form.password_2 }}</p>
+        <p class="qregform-login"><input id="regform-login" type="submit" value="Register Account"></p>
+      </form>
+      {% for message in messages %}
+      <p class="regform-errors">{{ messages }}</p>
+      {% endfor %}
+      <p class="reg-already">Already have an account? <span class="s-in"><a href="{% url 'login' %}">Login</a></span></p>
+    </section>
+  </div>
+
+  <div class="pseudoregister-rightcontainer"></div>
+
+</div>
+<br>
+<br>
+<br>
+
+<!--This script is for styling-->
+<script>
+
+  // Query All input fields
+  var form_fields = document.getElementsByTagName('input');
+
+  // Placeholders
+  form_fields[3].placeholder = 'Email...';
+  form_fields[4].placeholder = 'Enter password...';
+  form_fields[5].placeholder = 'Re-enter password...';
+
+  for (var field in form_fields) {
+    form_fields[field].className += ' form-control'
+  }
+
+  // Font size
+  form_fields[3].style.fontSize = '0.6em';
+  form_fields[4].style.fontSize = '0.6em';
+  form_fields[5].style.fontSize = '0.6em';
+
+  // Border radi
+  form_fields[3].style.borderRadius = '0.5em';
+  form_fields[4].style.borderRadius = '0.5em';
+  form_fields[5].style.borderRadius = '0.5em';
+
+  // Padding left
+  form_fields[3].style.paddingLeft = '0.5em';
+  form_fields[4].style.paddingLeft = '0.5em';
+  form_fields[5].style.paddingLeft = '0.5em';
+
+  // Padding bottom
+  form_fields[3].style.paddingBottom = '0.2em';
+  form_fields[4].style.paddingBottom = '0.2em';
+  form_fields[5].style.paddingBottom = '0.2em';
+
+  // Padding top
+  form_fields[3].style.paddingTop = '0.2em';
+  form_fields[4].style.paddingTop = '0.2em';
+  form_fields[5].style.paddingTop = '0.2em';
+
+  // Width
+  form_fields[3].style.width = '15em';
+  form_fields[4].style.width = '15em';
+  form_fields[5].style.width = '15em';
+
+</script>
+
+{% endblock %}
