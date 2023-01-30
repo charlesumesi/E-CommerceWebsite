@@ -1,0 +1,338 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – {{ product_to_buy.name }}{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+<!--Author: Charles Umesi-->
+
+{% for buy_category in buy_categories %}
+{% if buy_category.group == product_to_buy.buy_category_accessible %}
+<p class="buy-category"><a href="{% url 'buycategory' buy_category.id %}">{{ product_to_buy.buy_category_accessible }} (Buy Products)</a> > {{ product_to_buy.name }}</p>
+{% endif %}
+{% endfor %}
+
+<div class="product-heading">
+  <p><span class="should-be-h2-but-decided-p"><strong>{{ product_to_buy.name }}</strong></span><span>&ensp;</span><span class="code">{{ product_to_buy.code }}</span></p>
+
+  {% if product_to_buy.mean_rating == 0 %}
+  <p class="ratingb"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% elif product_to_buy.mean_rating == 1 %}
+  <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% elif product_to_buy.mean_rating == 2 %}
+  <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% elif product_to_buy.mean_rating == 3 %}
+  <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% elif product_to_buy.mean_rating == 4 %}
+  <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% elif product_to_buy.mean_rating == 5 %}
+  <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span><span class="reviews">&ensp;<a href="{% url 'producttobuy' product_to_buy.id %}#reviews-heading">Read reviews</a></span></p>
+  {% endif %}
+</div>
+
+<div class="core-product-container">
+  <section class="product-left-column">
+    <div class="full-img">
+      {% with product_to_buy.image_1 as image %}
+      <img id="b-displayed-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+    </div>
+    <p class=b-slide-no style="text-align:center;font-size:1.3em">1/5</p>
+    <div class="b-thumbnail">
+      <div class="b-p1">
+        {% with product_to_buy.image_1 as image1 %}
+        <img alt="{{ product_to_buy.name }}" src="{% static image1 %}"/>
+        {% endwith %}
+      </div>
+      <div class="b-p2">
+        {% with product_to_buy.image_2 as image2 %}
+        <img alt="{{ product_to_buy.name }}" src="{% static image2 %}"/>
+        {% endwith %}
+      </div>
+      <div class="b-p3">
+        {% with product_to_buy.image_3 as image3 %}
+        <img alt="{{ product_to_buy.name }}" src="{% static image3 %}"/>
+        {% endwith %}
+      </div>
+      <div class="b-p4">
+        {% with product_to_buy.image_4 as image4 %}
+        <img alt="{{ product_to_buy.name }}" src="{% static image4 %}"/>
+        {% endwith %}
+      </div>
+      <div class="b-p5">
+        {% with product_to_buy.image_5 as image5 %}
+        <img alt="{{ product_to_buy.name }}" src="{% static image5 %}"/>
+        {% endwith %}
+      </div>
+    </div>
+
+    <!--Next and previous arrows-->
+    <a class="b-prev" onclick="b-pArray">&#10094;</a>
+    <a class="b-next" onclick="b-pArray">&#10095;</a>
+
+  </section>
+
+  <section class="product-right-column">
+    {% if product_to_buy.stock > 0 %}
+    <form id="product-form">
+      {% csrf_token %}
+      <p class="mode">TO {{ product_to_buy.mode|upper }}</p>
+      <p><strong><span class="currency">£</span><span class="price">{{ product_to_buy.retail_price }}</span></strong></p>
+      <p class="vat"><strong>{{ product_to_buy.vat }}</strong></p>
+      <p class="special"><strong>{{ product_to_buy.special }}</strong></p>
+      <p>{{ product_to_buy.stock }}&ensp;in stock</p>       <!--NOTE FOR ME: Test the form by altering the stock of one or two products in admin-->
+      <select id="quantity" name="qty"></select>
+      <p><button id="add-to-basket-buy" type="button">Add to Basket</button></p>
+    </form>
+    {% else %}
+    <div id="b-out-of-stock">
+      <p><span class="currency">£</span>{{ product_to_buy.retail_price }}</p>
+      <p>{{ product_to_buy.vat }}</p>
+      <p>{{ product_to_buy.special }}</p>
+      <p><strong>Out of stock (Speak to staff)</strong></p>
+    </div>
+    {% endif %}
+  </section>
+</div>
+
+<div class="product-info">
+  <h3 class="extra-product-info-heading">About the product</h3>
+  <article class="extra-product-info-main">{{ product_to_buy.description }}</article>
+
+  <h3 class="extra-product-info-heading">Safety Instructions & Further Information</h3>
+  {% with product_to_buy.safety as document %}
+  <p class="extra-product-info-download"><a href="{% static document %}" download>&emsp;Documentation&emsp;</a></p>
+  {% endwith %}
+
+  <h3 id="reviews-heading">Reviews</h3>
+  {% for customer_pb_rating in customer_pb_ratings %}
+  {% if customer_pb_rating.product_bought == product_to_buy.name and customer_pb_rating.code == product_to_buy.code %}
+
+  <p class="extra-product-info-main2">{{ customer_pb_rating.name }},&ensp;<span>{{ customer_pb_rating.date_posted_string }}</span></p>
+
+    {% if customer_pb_rating.rating_selected == 1 %}
+    <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="should-be-h3-but-decided-p-instead">&ensp;{{ customer_pb_rating.comments_heading }}</span></p>
+    {% elif customer_pb_rating.rating_selected == 2 %}
+    <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="should-be-h3-but-decided-p-instead">&ensp;{{ customer_pb_rating.comments_heading }}</span></p>
+    {% elif customer_pb_rating.rating_selected == 3 %}
+    <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="should-be-h3-but-decided-p-instead">&ensp;{{ customer_pb_rating.comments_heading }}</span></p>
+    {% elif customer_pb_rating.rating_selected == 4 %}
+    <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="should-be-h3-but-decided-p-instead">&ensp;{{ customer_pb_rating.comments_heading }}</span></p>
+    {% elif customer_pb_rating.rating_selected == 5 %}
+    <p class="ratingb"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="should-be-h3-but-decided-p-instead">&ensp;{{ customer_pb_rating.comments_heading }}</span></p>
+    {% endif %}
+
+  <article class="comment-recorded">{{ customer_pb_rating.comments }}</article>
+  <br>
+  <br>
+
+  {% endif %}
+  {% endfor %}
+
+  <p id="pre-logged-in-rating-form">Rate product (as a <span style="color:#3D3F41;">hire</span>)</p>
+  {% if user.is_authenticated %}
+  <!--jQuery to reveal form (either versions)-->
+  <form id="logged-in-rating-form" action="" method="POST">
+    {% csrf_token %}
+    <!--For server only-->
+    <input type="hidden" value="{{ product_to_buy.name }}" name="product_name">
+    <input type="hidden" value="{{ product_to_buy.code }}" name="product_code">
+    <!--For customer only-->
+    <div class="core-rating-form">
+      <p><strong>Product</strong>: {{ product_to_buy.name }} ({{ product_to_buy.code }})</p>
+      <!--For customer and server-->
+      <p>Rate:</p>
+      <div class="rating-inputs">
+        <input type="radio" id="one" value="1" name="rate_product">
+        <input type="radio" id="two" value="2" name="rate_product">
+        <input type="radio" id="three" value="3" name="rate_product">
+        <input type="radio" id="four" value="4" name="rate_product">
+        <input type="radio" id="five" value="5" name="rate_product">
+      </div>
+      <div class="rating-labels">
+        <label for="one" id="rating_value_1">1</label>
+        <label for="two" id="rating_value_2">2</label>
+        <label for="three" id="rating_value_3">3</label>
+        <label for="four" id="rating_value_4">4</label>
+        <label for="five" id="rating_value_5">5</label>
+      </div>
+      <p>Heading:</p>
+      <div class="review-title-container">
+        <input type="text" id="review-title" name="review_title">
+      </div>
+      <p>Comment:</p>
+      <div class="comment-container">
+        <textarea id="comment" name="comment"></textarea>
+      </div> <!--31/12/22 - apply to pbuy; complete operator.html template for customer impressions (no review form here); complete model task-->
+      <div>
+        <input type="submit" id="submit-review" value="Submit review">
+      </div>
+    </div>
+  </form>
+  
+  {% else %}
+  <form id="not-logged-in-rating-form">
+    <p>You need to be <a href="{% url 'login' %}">logged in</a> to rate the product</p>
+  </form>
+  {% endif %}
+
+</div>
+
+<script>
+  // Before editing this script, read the comments in the script section of producttohire.html
+
+  // Relevant selectors
+  const bDisplayedImage = document.getElementById('b-displayed-image');
+  const bNext = document.querySelector('.b-next');
+  const bPrev = document.querySelector('.b-prev');
+  const bSlideNo = document.querySelector('.b-slide-no');
+  const bp1 = document.querySelector('.b-p1 img');
+  const bp2 = document.querySelector('.b-p2 img');
+  const bp3 = document.querySelector('.b-p3 img');
+  const bp4 = document.querySelector('.b-p4 img');
+  const bp5 = document.querySelector('.b-p5 img');
+
+  // Functions for displaying selected image
+  function bp1func() {
+    "{% with product_to_buy.image_1 as image1 %}"
+    bDisplayedImage.setAttribute('src', "{% static image1 %}")
+    "{% endwith %}"
+    bSlideNo.textContent = "1/5";
+    bp1.style.outline = "2px solid rgb(66,156,217)";
+    bp2.style.outline = "0px";
+    bp3.style.outline = "0px";
+    bp4.style.outline = "0px";
+    bp5.style.outline = "0px";
+  }
+  function bp2func() {
+    "{% with product_to_buy.image_2 as image2 %}"
+    bDisplayedImage.setAttribute('src', "{% static image2 %}")
+    "{% endwith %}"
+    bSlideNo.textContent = "2/5";
+    bp1.style.outline = "0px";
+    bp2.style.outline = "2px solid rgb(66,156,217)";
+    bp3.style.outline = "0px";
+    bp4.style.outline = "0px";
+    bp5.style.outline = "0px";
+  }
+  function bp3func() {
+    "{% with product_to_buy.image_3 as image3 %}"
+    bDisplayedImage.setAttribute('src', "{% static image3 %}")
+    "{% endwith %}"
+    bSlideNo.textContent = "3/5";
+    bp1.style.outline = "0px";
+    bp2.style.outline = "0px";
+    bp3.style.outline = "2px solid rgb(66,156,217)";
+    bp4.style.outline = "0px";
+    bp5.style.outline = "0px";
+  }
+  function bp4func() {
+    "{% with product_to_buy.image_4 as image4 %}"
+    bDisplayedImage.setAttribute('src', "{% static image4 %}")
+    "{% endwith %}"
+    bSlideNo.textContent = "4/5";
+    bp1.style.outline = "0px";
+    bp2.style.outline = "0px";
+    bp3.style.outline = "0px";
+    bp4.style.outline = "2px solid rgb(66,156,217)";
+    bp5.style.outline = "0px";
+  }
+  function bp5func() {
+    "{% with product_to_buy.image_5 as image5 %}"
+    bDisplayedImage.setAttribute('src', "{% static image5 %}")
+    "{% endwith %}"
+    bSlideNo.textContent = "5/5";
+    bp1.style.outline = "0px";
+    bp2.style.outline = "0px";
+    bp3.style.outline = "0px";
+    bp4.style.outline = "0px";
+    bp5.style.outline = "2px solid rgb(66,156,217)";
+  }
+
+  // Add event listeners
+  let bpArray = [bp1func, bp2func, bp3func, bp4func, bp5func];
+  bNext.addEventListener('click', () => {
+    for (let i of bpArray) {
+      if (bSlideNo.textContent == "1/5") {
+        bp2func();
+        break;
+      } else if (bSlideNo.textContent == "2/5") {
+        bp3func();
+        break;
+      } else if (bSlideNo.textContent == "3/5") {
+        bp4func();
+        break;
+      } else if (bSlideNo.textContent == "4/5") {
+        bp5func();
+        break;
+      } else if (bSlideNo.textContent == "5/5") {
+        bp1func();
+        break;
+      }
+    }
+  })
+  bPrev.addEventListener('click', () => {
+    for (let i of bpArray) {
+      if (bSlideNo.textContent == "5/5") {
+        bp4func();
+        break;
+      } else if (bSlideNo.textContent == "4/5") {
+        bp3func();
+        break;
+      } else if (bSlideNo.textContent == "3/5") {
+        bp2func();
+        break;
+      } else if (bSlideNo.textContent == "2/5") {
+        bp1func();
+        break;
+      } else if (bSlideNo.textContent == "1/5") {
+        bp5func();
+        break;
+      }
+    }
+  })
+  bp1.addEventListener('click', bp1func)
+  bp2.addEventListener('click', bp2func)
+  bp3.addEventListener('click', bp3func)
+  bp4.addEventListener('click', bp4func)
+  bp5.addEventListener('click', bp5func)
+  bDisplayedImage.addEventListener('mouseenter', () => {
+    bNext.style.display = "none";
+    bPrev.style.display = "none";
+  })
+  bDisplayedImage.addEventListener('mouseleave', () => {
+    bNext.style.display = "unset";
+    bPrev.style.display = "unset";
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    var $select = $("#quantity")
+    for (i=1; i<=10; i++) {
+      $select.append($('<option></option>').val(i).html(i))
+    }
+  })
+</script>
+
+<!--The next two script blocks deal with the product review dropdown-->
+<script>
+  $("#pre-logged-in-rating-form").click(function(){
+    $("#logged-in-rating-form").toggle();
+  });  
+</script>
+
+<script>
+  $("#pre-logged-in-rating-form").click(function(){
+    $("#not-logged-in-rating-form").toggle();
+  });  
+</script>
+
+{% endblock %}

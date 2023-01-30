@@ -1,0 +1,451 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – {{ hire_category.group }} (Hire Products){% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--Author: Charles Umesi-->
+
+<div class="hc-title-and-description">
+  <p class="should-be-h1-but-decided-p"><strong>{{ hire_category.group }} (Hire Products)</strong></p>
+  <p class="hc-description">{{ hire_category.description }}</p>
+</div>
+
+<div class="hire-columns">
+  {% if hire_category.group == 'Access' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Boss Ladderspan 3T Scaffold Tower (Single Width)' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">Boss Ladderspan 3T Scaffold Tower (S/Width)</a></p>
+                                                                                      <!--Shortened version of name of product explicitly used for webpage alignment reasons-->
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'RGT Metal Swingback Step Ladder' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+  <section class="column-3h">
+    <!--To be occupied by another hire product-->
+  </section>
+
+  {% elif hire_category.group == 'Compaction' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Honda GX Vibrating Plate' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Volvo Soil Compactor SD 135/175 B' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product)-->
+  </section>
+
+  {% elif hire_category.group == 'Drilling' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'SKT 700W Corded Rotary Drill' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    <!--Vacant space for another hire product-->
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product-->
+  </section>
+
+  {% elif hire_category.group == 'Lifting' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Cat DP35N Compact Diesel Forklift' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">Cat DP35N Compact Dsl Forklift</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'City Lifter CL25 Tower Crane' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product-->
+  </section>
+
+  {% elif hire_category.group == 'Sanding' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'RGT Plus Single Disc Sanding Machine' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    <!--Vacant space for another product-->
+  </section>
+
+  {% elif hire_category.group == 'Sawing' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == '255mm Jifa 1600W Mitre Saw Machine' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    <!--Vacant space for another product-->
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product-->
+  </section>
+
+  {% elif hire_category.group == 'Breaking' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Camon C2000 Rotavator' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    <!--Vacant space for another product-->
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product-->
+  </section>
+
+  {% elif hire_category.group == 'Cooling' %}
+  <section class="column-1h">
+    {% for product_to_hire in products_to_hire %}
+    {% if product_to_hire.name == 'Cecotec Portable Air Conditioner ForceClima' %}
+    <figure class="hire-product-image">
+      <a href="{% url 'producttohire' product_to_hire.id %}">
+      {% with product_to_hire.image_1 as image %}
+      <img class="pth-image" alt="{{ product_to_hire.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="hire-product"><a href="{% url 'producttohire' product_to_hire.id %}">{{ product_to_hire.name }}</a></p>
+
+        {% if product_to_hire.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_hire.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="hire-rate">From <strong><span>£</span>{{ product_to_hire.daily_hire_rate }}</strong>/ day</p>
+        <p class="vat">{{ product_to_hire.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2h">
+    <!--Vacant space for another hire product-->
+  </section>
+  <section class="column-3h">
+    <!--Vacant space for another hire product-->
+  </section>
+
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,238 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – {{ buy_category.group }} (Buy Products){% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--BEFORE EDITING THIS PAGE INTO A SINGLE PYTHON 'FOR LOOP', SEE COMMENTS ON THE HOME (INDEX) PAGE-->
+<!--Author: Charles Umesi (Original developer of the site, 2022-2023)-->
+
+<div class="bc-title-and-description">
+  <p class="should-be-h1-but-decided-p"><strong>{{ buy_category.group }} (Buy Products)</strong></p>
+  <p class="bc-description">{{ buy_category.description }}</p>
+</div>
+
+<div class="buy-columns">
+  {% if buy_category.group == 'Access' %}
+  <section class="column-1b">
+    {% for product_to_buy in products_to_buy %}
+    {% if product_to_buy.name == 'RGT Metal Swingback Step Ladder' %}
+    <figure class="buy-product-image">
+      <a href="{% url 'producttobuy' product_to_buy.id %}">
+      {% with product_to_buy.image_1 as image %}
+      <img class="ptb-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="buy-caption">
+        <p class="buy-product"><a href="{% url 'producttobuy' product_to_buy.id %}">{{ product_to_buy.name }}</a></p>
+
+        {% if product_to_buy.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="retail-price">TO BUY: <strong><span>£</span>{{ product_to_buy.retail_price }}</strong></p>
+        <p class="vat">{{ product_to_buy.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2b">
+    <!--Vacant space for another buy product-->
+  </section>
+  <section class="column-3b">
+    <!--Vacant space for another buy product-->
+  </section>
+
+  {% elif buy_category.group == 'Breaking' %}
+  <section class="column-1b">
+    {% for product_to_buy in products_to_buy %}
+    {% if product_to_buy.name == 'Camon C2000 Rotavator' %}
+    <figure class="buy-product-image">
+      <a href="{% url 'producttobuy' product_to_buy.id %}">
+      {% with product_to_buy.image_1 as image %}
+      <img class="ptb-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="buy-caption">
+        <p class="buy-product"><a href="{% url 'producttobuy' product_to_buy.id %}">{{ product_to_buy.name }}</a></p>
+
+        {% if product_to_buy.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="retail-price">TO BUY: <strong><span>£</span>{{ product_to_buy.retail_price }}</strong></p>
+        <p class="vat">{{ product_to_buy.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2b">
+    <!--Vacant space for another buy product-->
+  </section>
+  <section class="column-3b">
+    <!--Vacant space for another buy product-->
+  </section>
+
+  {% elif buy_category.group == 'Drilling' %}
+  <section class="column-1b">
+    {% for product_to_buy in products_to_buy %}
+    {% if product_to_buy.name == 'SKT 700W Corded Rotary Drill' %}
+    <figure class="buy-product-image">
+      <a href="{% url 'producttobuy' product_to_buy.id %}">
+      {% with product_to_buy.image_1 as image %}
+      <img class="ptb-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="buy-caption">
+        <p class="buy-product"><a href="{% url 'producttobuy' product_to_buy.id %}">{{ product_to_buy.name }}</a></p>
+
+        {% if product_to_buy.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="retail-price">TO BUY: <strong><span>£</span>{{ product_to_buy.retail_price }}</strong></p>
+        <p class="vat">{{ product_to_buy.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2b">
+    <!--Vacant space for another buy product-->
+  </section>
+  <section class="column-3b">
+    <!--Vacant space for another buy product-->
+  </section>
+
+  {% elif buy_category.group == 'Sanding' %}
+  <section class="column-1b">
+    {% for product_to_buy in products_to_buy %}
+    {% if product_to_buy.name == 'RGT Plus Single Disc Sanding Machine' %}
+    <figure class="buy-product-image">
+      <a href="{% url 'producttobuy' product_to_buy.id %}">
+      {% with product_to_buy.image_1 as image %}
+      <img class="ptb-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="buy-caption">
+        <p class="buy-product"><a href="{% url 'producttobuy' product_to_buy.id %}">{{ product_to_buy.name }}</a></p>
+
+        {% if product_to_buy.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="retail-price">TO BUY: <strong><span>£</span>{{ product_to_buy.retail_price }}</strong></p>
+        <p class="vat">{{ product_to_buy.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2b">
+    <!--Vacant space for another buy product-->
+  </section>
+  <section class="column-3b">
+    <!--Vacant space for another buy product-->
+  </section>
+
+  {% elif buy_category.group == 'Sawing' %}
+  <section class="column-1b">
+    {% for product_to_buy in products_to_buy %}
+    {% if product_to_buy.name == '255mm Jifa 1600W Mitre Saw Machine' %}
+    <figure class="buy-product-image">
+      <a href="{% url 'producttobuy' product_to_buy.id %}">
+      {% with product_to_buy.image_1 as image %}
+      <img class="ptb-image" alt="{{ product_to_buy.name }}" src="{% static image %}"/>
+      {% endwith %}
+      </a>
+      <figcaption class="hire-caption">
+        <p class="buy-product"><a href="{% url 'producttobuy' product_to_buy.id %}">{{ product_to_buy.name }}</a></p>
+
+        {% if product_to_buy.mean_rating == 0 %}
+        <p class="rating"> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 1 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 2 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 3 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 4 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span></p>
+        {% elif product_to_buy.mean_rating == 5 %}
+        <p class="rating"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></p>
+        {% endif %}
+
+        <p class="retail-price">TO BUY: <strong><span>£</span>{{ product_to_buy.retail_price }}</strong></p>
+        <p class="vat">{{ product_to_buy.vat }}</p>
+      </figcaption>
+    </figure>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="column-2b">
+    <!--Vacant space for another buy product-->
+  </section>
+  <section class="column-3b">
+    <!--Vacant space for another buy product-->
+  </section>
+
+  {% endif %}
+</div>
+
+
+{% endblock %}

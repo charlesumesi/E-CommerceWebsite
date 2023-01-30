@@ -1,0 +1,27 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}RGT Hire – Review Restriction (Hire) Message{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+<!--Author: Charles Umesi-->
+
+<br>
+<br>
+<br>
+<p class="review-restriction">You need to have previously <span style="color:#429CD9;">hired</span> the product before you can write a review on it as a <i>hire</i> product (and rate it).</p>
+<p class="review-restriction" style="margin-top:-0.5em;">(We appear to have no record of a hire of this product on this account.)</p>
+<p class="review-restriction" style="margin-top:-0.5em;">(If the product is purchasable, check if you bought rather than hired it and rate it as a purchasable product.)</p>
+<br>
+<br>
+<br>
+
+{% endblock %}

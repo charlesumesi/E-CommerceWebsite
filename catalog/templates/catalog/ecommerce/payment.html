@@ -1,0 +1,87 @@
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+<!--Author: Charles Umesi-->
+
+<div id="grand-payment-container">
+  <form id="payment" action="{% url 'transactionprocessing' %}" method="POST">
+    {% csrf_token %}
+    <h2>Payment card details</h2>
+    <label for="name-on-card" id="card-no-label">Name on card</label>
+    <input type="text" id="name-on-card" name="name-on-card"><br></br>
+
+    <label for="card-number" id="card-no-label">Card number</label>
+    <input type="text" id="card-number" name="card-number"><br></br>
+
+    <label for="expiry-date" id="exp-date-label">Expiry date</label>
+    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YYYY"><br></br>
+
+    <label for="security-code" id="secur-code-label">Security code</label>
+    <input type="text" id="security-code" name="security-code" style="width:10em;"><br></br>
+    <button type="submit" id="make-payment">Make Payment</button>
+  </form>
+
+  <div id="payment-logos">
+    <p style="text-align:center;margin-top:1em;"><img alt="payment logos" src="{% static 'images/payment-logos-plus-background-for-payment-page-cropped.png' %}"/></p>
+    <br>
+    <br>
+    <table>
+      <tr>
+        <td>Subtotal</td>
+        <td class="t-currency">&emsp;£</td>
+        <td class="t-subtotal" style="text-align:right;"></td>
+      </tr>
+      <tr>
+        <td>VAT</td>
+        <td class="t-currency">&emsp;£</td>
+        <td class="t-vat" style="text-align:right;"></td>
+      </tr>
+      <tr>
+        <td>Shipping costs</td>
+        <td class="t-currency">&emsp;£</td>
+        {% for shipping_address in shipping_addresses %}
+        {% if shipping_address.transaction_key == shipping_address_key_verifier and shipping_address.country == 'Nigeria' %}
+        <td class="t-shipping" style="text-align:right;">1000.00</td>
+        {% elif shipping_address.transaction_key == shipping_address_key_verifier and shipping_address.country != 'Nigeria' %}
+        <td class="t-shipping" style="text-align:right;">20000.00</td>
+        {% endif %}
+        {% endfor %}
+      </tr>
+      <tr>
+        <td><!--Leave blank--></td>
+        <td><!--Leave blank--></td>
+        <td><!--Leave blank--></td>
+      </tr>
+      <tr>
+        <td style="font-size:1.3em;">Total</td>
+        <td class="t-currency" style="font-size:1.3em;">&ensp;£</td>
+        <td class="t-total" style="text-align:right;font-size:1.3em;"></td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<script>
+  let tSubtotal = document.querySelector('.t-subtotal');
+  let tVAT = document.querySelector('.t-vat');
+  let tShipping = document.querySelector('.t-shipping');
+  let tTotal = document.querySelector('.t-total');
+
+  tSubtotal.textContent = localStorage.total;
+  number_tVAT = 17.5/100 * Number(tSubtotal.textContent);
+  tVAT.textContent = number_tVAT.toFixed(2);
+  number_tTotal = Number(tSubtotal.textContent) + Number(tVAT.textContent) + Number(tShipping.textContent);
+  tTotal.textContent = number_tTotal.toFixed(2);
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--This view processes the cookie. Django/Python needs this page in order to be able to do that (on the server)-->
+<!--Author: Charles Umesi-->
+
+<h1>Order and Payment Received</h1>
+
+<script>
+  sessionStorage.clear();
+  localStorage.clear();
+</script>
+
+{% endblock %}

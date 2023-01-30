@@ -1,0 +1,26 @@
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/modified-from-jquery-ui-1-12-1-lightness.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--This view processes the payment request from the payment page.
+... As Django does not allow both a 'POST' request and a cookie request to be processed by the same view, an intermediate view (like this one) is necessary.
+... The 'transaction complete' view will handle the cookie-->
+<!--Author: Charles Umesi-->
+
+<h1>Processing...</h1>
+
+<script>
+  setTimeout(function(){
+     window.location.href = "{% url 'transactioncomplete' %}";
+  }, 8000)
+</script>
+
+{% endblock %}

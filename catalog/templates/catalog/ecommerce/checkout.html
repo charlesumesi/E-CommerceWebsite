@@ -1,0 +1,112 @@
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/epsilon.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/zeta.css' %}">
+<link rel="stylesheet" type="text/css" href="../..{% static 'css/eta.css' %}">
+{% endblock %}
+
+{% block main %}
+<!--Author: Charles Umesi (Original developer of the site, 2022-2023)-->
+
+<form id="order" action="{% url 'payment' %}" method="POST">
+  {% csrf_token %}
+  <div>
+    <h3>Billing address details</h3>
+    <label for="full-name" id="full-name-label">Name</label>
+    <input type="text" id="full-name" name="full-name"><br></br>
+
+    <label for="email" id="email-label">Email</label>
+    <input type="text" id="email" name="email"><br></br>
+
+    <label for="phone" id="phone-label">Phone</label>
+    <input type="text" id="phone" name="phone"><br></br>
+
+    <label for="street" id="street-label">Street</label>
+    <input type="text" id="street" name="street"><br></br>
+
+    <label for="city" id="city-label">City/Town</label>
+    <input type="text" id="city" name="city"><br></br>
+
+    <label for="country" id="country-label">Country</label>
+    <input type="text" id="country" name="country"><br></br>
+
+    <label for="post-code" id="postcode-label">Post code</label>
+    <input type="text" id="postcode" name="postcode" style="width:10em;"><br></br>
+  </div>
+
+  <div>
+    <h3>Shipping address details</h3>
+    <label for="s-full-name" id="s-full-name-label">Name</label>
+    <input type="text" id="s-full-name" name="s-full-name"><br></br>
+
+    <label for="s-street" id="s-street-label">Street</label>
+    <input type="text" id="s-street" name="s-street"><br></br>
+
+    <label for="s-city" id="s-city-label">City/Town</label>
+    <input type="text" id="s-city" name="s-city"><br></br>
+
+    <label for="s-country" id="s-country-label">Country</label>
+    <input type="text" id="s-country" name="s-country"><br></br>
+
+    <label for="s-postcode" id="s-postcode-label">Post code</label>
+    <input type="text" id="s-postcode" name="s-postcode" style="width:10em;">
+  </div><br></br>
+
+    <!--These two (hidden) inputs below are for the creation of the cookie by JavaScript in <script> below that will send the order to the server-->
+    <input type="hidden" id="visit-no" value="{{ visit_no }}" name="visit_no">
+    <input type="hidden" id="session-key" value="{{ request.session.session_key }}">
+    <!--input type="submit"-->
+    <button type="submit" id="address-details">Submit details</button>
+</form>
+
+<script>
+  // Creating empty arrays that will receive shopping cart data
+  codeArray = Object.keys(sessionStorage);
+  unitPriceArray = [];
+  costToHireArray = [];
+  unitHireRateArray = [];
+  qtyArray = [];
+  durationArray = [];
+  startArray = [];
+  endArray = [];
+
+  // Transfer of shopping cart details from the browser's sessionStorage to the arrays created
+  for (let c of Object.keys(sessionStorage)) {
+    if (JSON.parse(sessionStorage.getItem(c))['mode'] == 'Buy') {
+      unitPriceArray.push(JSON.parse(sessionStorage.getItem(c))['price']);
+      costToHireArray.push("0.00");
+      unitHireRateArray.push("0.00");
+      qtyArray.push(JSON.parse(sessionStorage.getItem(c))['qty']);
+      durationArray.push("0.00");
+      startArray.push('n/a');
+      endArray.push('n/a')
+    } else if (JSON.parse(sessionStorage.getItem(c))['mode'] == 'Hire' && JSON.parse(sessionStorage.getItem(c))['qty'] != "To be selected") {
+      unitPriceArray.push("0.00");
+      costToHireArray.push(JSON.parse(sessionStorage.getItem(c))['cost']);
+      unitHireRateArray.push(JSON.parse(sessionStorage.getItem(c))['rate']);
+      qtyArray.push(JSON.parse(sessionStorage.getItem(c))['qty']);
+      durationArray.push(JSON.parse(sessionStorage.getItem(c))['duration']);
+      startArray.push(JSON.parse(sessionStorage.getItem(c))['from']);
+      endArray.push(JSON.parse(sessionStorage.getItem(c))['to'])
+    }
+  }
+  codes = codeArray.join('&') + ',';
+  unitPrices = unitPriceArray.join('&') + ',';
+  costToHire = costToHireArray.join('&') + ',';
+  unitHireRates = unitHireRateArray.join('&') + ',';
+  quantities = qtyArray.join('&') + ',';
+  durations = durationArray.join('&') + ',';
+  starts = startArray.join('&') + ',';
+  ends = endArray.join('&') + ',';
+  total = localStorage.total;
+
+  // Creating session- and visit-specific cookie and transferring shopping cart data from arrays to (newly) created cookie
+  sessionKey = document.getElementById('session-key');
+  visitNo = document.getElementById('visit-no');
+  document.cookie = "order_cookie_" + sessionKey.value + "_" + visitNo.value + "=start" + codes + unitPrices + costToHire + unitHireRates + quantities + durations + starts + ends + total + "; path=/";
+</script>
+
+
+{% endblock %}
