@@ -1,0 +1,525 @@
+@import "gamma.css";
+@import "epsilon.css";
+@import "eta.css";
+@import "font-awesome-4.7.0/css/font-awesome.css";
+
+/* Covers:
+
+cart.html
+checkout.html
+login.html
+register.html
+password_change_done.html
+password_change_prompt.html
+password_change_view.html
+Author: Charles Umesi 
+*/
+
+#shopping-cart {
+  margin-left: 2.4em;
+  font-size: 2.9em;
+}
+
+#subtotal {
+  margin-left: 3.5em;
+  font-size: 2em;
+}
+
+#summary-cart-container figure {
+  margin-left: 5em;
+  margin-top: 2em;
+  width: 68em;
+  font-size: 1.4em;
+  display: flex;
+  align-items: center;
+  background-color: rgba(55,58,55,0.05);
+}
+
+#summary-cart-container figure div {
+  display: block;
+  text-align: center;
+  width: 30em;
+}
+
+.minus, .quantity, .plus {
+  border: 1px solid #429CD9;
+}
+
+.minus, .plus {
+  cursor: pointer;
+  padding: 0.3em;
+  background-color: rgba(55,58,55,0.2);
+}
+
+.minus {
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+}
+
+.plus {
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+}
+
+.quantity {
+  padding: 0.3em 0.3em;
+  padding-right: 0.7em;
+  padding-left: 0.7em;
+}
+
+#summary-cart-container figure figcaption ul {
+  list-style: none;
+}
+
+#summary-cart-container figure figcaption {
+  width: 35em;
+}
+
+#summary-cart-container figure div img {
+  width: 40%;
+  height: 40%;
+  object-fit: scale-down;
+  outline: 1px solid rgba(66,156,217,0.3);
+}
+
+.hire-inputs-and-instructions {
+  font-size: 1.4rem; /* Note: 'rem' not 'em' */
+}
+
+.tol {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.start-entered, .end-entered, .quantity-to-be-selected, .quantity-to-be-amended {
+  font-size: 1.4rem;
+  width: 10em; /* Not for .quantity-to-be-selected */
+  text-align: center;
+  border: 0.1em solid #429CD9;
+}
+
+.start-entered:focus, .end-entered:focus {
+  outline: 0.01em solid rgba(66,156,217,0.5);
+}
+
+.submit-in-name-only-not-type, .add-to-cart-hire, .delete-product, .amend, .amend-cart-hire, #submit-cart {
+  width: 6em; /* Not for .add-to-cart-hire or .amend-cart-hire or #submit-cart */
+  height: 1.6em;
+  cursor: pointer;
+  margin-left: 0.5em; /* Not for .delete-product or .amend */
+  font-size: 1.4rem;  /* Note: 'rem' is used and not 'em' */
+  background-color: rgba(241,245,167,0.3); /* Not for .delete-product or .amend */
+}
+
+.add-to-cart-hire, .amend-cart-hire {
+  width: 8em;
+}
+
+.submit-in-name-only-not-type:hover, .add-to-cart-hire:hover, .amend-cart-hire:hover, .delete-product:hover, #submit-cart p a:hover {
+  background-color: #FFC809;
+}
+
+.quantity-to-be-selected, .quantity-to-be-amended {
+  width: 6em;
+  text-align: center;
+}
+
+.quantity-to-be-selected, .quantity-to-be-amended, .delete-product {
+  margin-left: 0.1em;
+}
+
+.delete-product, .amend {
+  background-color: rgba(55,58,55,0.2);
+}
+
+.amend {
+  margin-left: 9em;
+}
+
+.amend:hover {
+  background-color: rgba(55,58,55,0.4);
+}
+
+#submit-cart {
+  text-align: center;
+  font-size: 1.5em;
+  height: 3em;
+  display: none;
+}
+
+#submit-cart a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.warning-p {
+  color: purple;
+}
+
+#order {
+  margin-left: 3em;
+}
+
+#full-name {
+  margin-left: 4.4em;
+}
+
+#email {
+  margin-left: 4.6em;
+}
+
+#phone {
+  margin-left: 4.08em;
+}
+
+#street {
+  margin-left: 4.1em;
+}
+
+#city {
+  margin-left: 2.4em;
+}
+
+#country {
+  margin-left: 3.2em;
+}
+
+#postcode {
+  margin-left: 2.3em;
+}
+
+#s-full-name {
+  margin-left: 4.4em;
+}
+
+#s-street {
+  margin-left: 4.1em;
+}
+
+#s-city {
+  margin-left: 2.4em;
+}
+
+#s-country {
+  margin-left: 3.2em;
+}
+
+#s-postcode {
+  margin-left: 2.3em;
+}
+
+#grand-payment-container {
+  margin-left: 7em;
+  margin-top: 4em;
+  display: inline-grid;
+  grid-template-areas: "payment logos";
+  grid-template-columns: 1.5fr 1.5fr;
+}
+
+#payment {
+  grid-area: payment;
+  width: 50em;
+}
+
+#payment-logos {
+  grid-area: logos;
+  margin-left: 2em;
+  width: 40em;
+  border-radius: 1em;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+#name-on-card {
+  margin-left: 3.6em;
+}
+
+#card-number {
+  margin-left: 4em;
+}
+
+#expiry-date {
+  margin-left: 4.8em;
+  width: 10em;
+}
+
+#security-code {
+  margin-left: 3.8em; 
+  width: 10em;
+}
+
+#order div span, #order div p, #order div label, #payment label {
+  font-size: 1.2em;
+}
+
+#order div h3 {
+  font-size: 1.3em;
+}
+
+#order div input {
+  width: 25em;
+  padding-left: 0.5em;
+}
+
+#payment input {
+  width: 25em;
+  padding-left: 0.5em;
+}
+
+#order div input:focus, #payment input:focus {
+  outline: 0.01em solid rgba(66,156,217,0.5);
+}
+
+#address-details, #make-payment {
+  width: 13em;
+  height: 2em;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+#payment-logos p img {
+  width: 70%;
+  height: 25%;
+  object-fit: scale-down;
+}
+
+#payment-logos table {
+  font-size: 1.4em;
+  margin-left: auto; /*The 'autos' center the table within its parent container */
+  margin-right: auto;
+}
+
+.subtotal-to-pay, .vat-to-pay, .shipping-to-pay, .total-to-pay {
+  text-align: right;
+}
+
+#login-container, #register-container, #reset-container {
+  border: 1px solid rgb(0,0,0,0.5);
+  margin-left: 25em;
+  margin-right: 35em;
+  background-color: rgba(55,58,55,0.05);
+}
+
+#forgot-container {
+  border: 1px solid rgb(0,0,0,0.5);;
+  margin-left: 15em;
+  margin-right: 25em;
+  background-color: rgba(55,58,55,0.05);
+}
+
+.login-card, .forgot-password, .reg, .register-card, .forgot-card, .reset-card, #messages {
+  font-size: 1.6em;
+}
+
+.login-title {
+  margin-left: 6em;
+  padding-right: 8em;
+}
+
+#login-form {
+  display: block;
+  margin-left: 7em;
+  padding-right: 4em;
+}
+
+.fa-user {
+  padding-right: 1em;
+}
+
+.fa-key {
+  padding-right: 0.7em;
+}
+
+.fa-user, .fa-key {
+  color: #429CD9;   /* font-size: Done inline */
+}
+
+.fa-envelope-square {
+  padding-right: 0.8em;
+  color: #429CD9;
+}
+
+.logform-email, .logform-password, .regform-username, .regform-email, .regform-password, .forgotform-email, .fa-envelope-square {
+  font-size: 1.6em;
+}
+
+.logform-email, .regform-username {
+  margin-top: 0;
+}
+
+.logform-password, .regform-email, .regform-password {
+  margin-top: -0.7em;
+}
+
+#log-email, #log-password, #forgot-email {
+  font-size: 0.6em; /* Note: This is multiplying the values for .login-card */
+  border-radius: 0.5em;
+  padding-left: 0.5em;
+  padding-bottom: 0.2em;
+  padding-top: 0.2em;
+  width: 15em;
+}
+
+#logform-login, #regform-login, #forgot-submit, #reset-submit {
+  width: 7em;
+  margin-left: 2.6em; /* Not for regform-login */
+  font-size: 1em;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5em;
+  background: #429CD9;
+}
+
+#logform-login:hover, #regform-login:hover, #forgot-submit:hover, #reset-submit:hover {
+  color: black;
+  background: #FFC809;
+}
+
+#logform-login, #forgot-submit {
+  padding: 0.3em;
+}
+
+#regform-login {
+  padding: 0.3em 0.5em 0.3em 0.5em;
+  width: 12em;
+  margin-left: 2.4em;
+}
+
+#messages, .forgot-password, .reg, .regform-errors {
+  margin-left: 7em;
+  padding-right: 3em;
+  font-size: 1.6em;
+}
+
+.s-up, .s-in {
+  border: 1px solid black;
+  border-radius: 0.5em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-right: 1em;
+  padding-left: 1em;
+  font-size: 0.97em;
+}
+
+.s-up:hover, .s-in:hover {
+  background: #FFC809;
+}
+
+.forgot-password a, .s-up a, .s-in a, .complete a {
+  color: #429CD9;
+  text-decoration: none;
+}
+
+.forgot-password a:hover, .s-up a:hover, .s-in a:hover, .complete a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.grandlogin-container {
+  margin-left: 7.5em;
+  display: grid;
+  grid-template-areas: "pseudologin-leftcontainer login-container pseudologin-rightcontainer";
+  grid-template-columns: 0.1fr 2fr 0.1fr;
+}
+
+.pseudologin-leftcontainer {
+  grid-area: pseudologin-leftcontainer;
+}
+
+#login-container {
+  width: 50em;
+  grid-area: login-container;
+}
+
+.pseudologin-rightcontainer {
+  grid-area: pseudologin-rightcontainer;
+}
+
+.register-title {
+  margin-left: 6.1em;
+  padding-right: 3em;
+}
+
+#register-form {
+  display: block;
+  margin-left: 7em;
+  padding-right: 5.2em;
+}
+
+.reg-already {
+  margin-left: 6.9em;
+  padding-right: 3em;
+}
+
+.grandregister-container {
+  margin-left: 7em;
+  display: grid;
+  grid-template-areas: "pseudoregister-leftcontainer register-container pseudoregister-rightcontainer";
+  grid-template-columns: 0.1fr 2fr 0.1fr;
+}
+
+.pseudoregister-leftcontainer {
+  grid-area: pseudoregister-leftcontainer;
+}
+
+#register-container {
+  grid-area: register-container;
+  width: 50em;
+}
+
+.pseudoregister-rightcontainer {
+  grid-area: pseudoregister-rightcontainer;
+}
+
+.grandforgot-container {
+  margin-left: 7em;
+  display: grid;
+  grid-template-areas: "pseudoforgot-leftcontainer forgot-container pseudoforgot-rightcontainer";
+  grid-template-columns: 0.1fr 2fr 0.1fr;
+}
+
+.pseudoforgot-leftcontainer {
+  grid-area: pseudoforgot-leftcontainer;
+}
+
+#forgot-container {
+  grid-area: forgot-container;
+}
+
+.pseudoforgot-rightcontainer {
+  grid-area: pseudoforgot-rightcontainer;
+}
+
+.forgot-title {
+  padding-left: 2.5em;
+  padding-right: 3em;
+}
+
+#forgotpassword-form {
+  display: block;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+#forgot-email {
+  width: 25em;
+}
+
+.forgotform-email {
+  margin-top: -0.5em;
+}
+
+.pforgot-submit {
+  margin-top: -0.85em;
+  padding-bottom: 0.5em;
+}
+
+.email-sent {
+  font-size: 1.6em;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.complete {
+  text-align: center;
+  font-size: 1.6em;
+}
