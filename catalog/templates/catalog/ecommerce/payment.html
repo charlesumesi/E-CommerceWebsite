@@ -49,9 +49,9 @@
         <td class="t-currency">&emsp;£</td>
         {% for shipping_address in shipping_addresses %}
         {% if shipping_address.transaction_key == shipping_address_key_verifier and shipping_address.country == 'Nigeria' %}
-        <td class="t-shipping" style="text-align:right;">1000.00</td>
+        <td class="t-shipping" style="text-align:right;">50.00</td>
         {% elif shipping_address.transaction_key == shipping_address_key_verifier and shipping_address.country != 'Nigeria' %}
-        <td class="t-shipping" style="text-align:right;">20000.00</td>
+        <td class="t-shipping" style="text-align:right;">200.00</td>
         {% endif %}
         {% endfor %}
       </tr>
