@@ -3,6 +3,8 @@ from .models import *
 
 # Register your models here.
 
+# Author: Charles Umesi
+
 admin.site.register(User)
 admin.site.register(Product_to_hire)
 admin.site.register(Hire_category)
