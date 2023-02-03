@@ -104,3 +104,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # During development only
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# For production only; note that you need to complete the assignments below
+#EMAIL_HOST =
+#EMAIL_PORT =
+#EMAIL_HOST_USER =
+#EMAIL_HOST_PASSWORD =
+#EMAIL_USE_TLS = True
+#DEFAULT_FROM_EMAIL =
